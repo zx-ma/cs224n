@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, geometry, amssymb, bm}
+\geometry{margin=1in}
+\newcommand{\dd}{\mathrm{d}}
+
+\begin{document}
+\title{cs224n a2 mzx}
+\maketitle
+
+\section*{(a)}
+
+\[
+    -\sum_{w \in \mathrm{Vocab}} y_w \log(\hat{y}_{w}) = - ( y_{o} \log (\hat{y}_{o}) + \sum_{w \in \mathrm{Vocab},\, w \neq o} y_{w} \log (\hat{y}_{w}) ) = - \log (\hat{y}_{o}), 
+\]
+where $y_o = 1$, $y_w = 0$ for $w \neq o$.
+
+\section*{(b)}
+\begin{align*}
+    \frac{\partial J_{\mathrm{naive-softmax}}(v_c, o, U)}{\partial v_{c}} 
+    &= - \frac{\partial }{\partial v_{c}} \log \mathbb{P}(O=o \mid C=c) \\
+    &= - \frac{\partial }{\partial v_{c}} \log \frac{\exp(u_{o}^{\top}v_{c})}{\sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c})} \\
+    &= - \frac{\partial }{\partial v_{c}} \left[ \log \exp(u_{o}^{\top}v_{c}) - \log \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) \right] \\
+    &= - \frac{\partial }{\partial v_{c}} \left[ u_{o}^{\top}v_{c} - \log \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) \right] \\
+    &= -u_{o} + \frac{\partial }{\partial v_{c}} \left[  \log \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) \right] \\
+    &= -u_{o} + \frac{1}{\sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c})} \frac{\partial }{\partial v_{c}} \left[ \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) \right] \\
+    &= -u_{o} + \frac{1}{\sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c})}  \left[ \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) \frac{\partial }{\partial v_{c}} (u_{w}^{\top}v_{c}) \right] \\
+    &= -u_{o} + \frac{1}{\sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c})}  \left[ \sum_{w \in \mathrm{Vocab}} \exp(u_{w}^{\top}v_{c}) u_{w} \right] \\
+    &= -u_{o} +  \sum_{w \in \mathrm{Vocab}} \frac{\exp(u_{w}^{\top}v_{c}) u_{w}}{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top}v_{c})}\\
+    &= -u_{o} + \sum_{w \in \mathrm{Vocab}}\mathbb{P}( O=w \mid C=c )u_{w}\\
+    &= -u_{o} + \sum_{w \in \mathrm{Vocab}}\hat{y}_{w}u_{w}\\
+    &= -y_{o}u_{o} + \sum_{w \in \mathrm{Vocab}}\hat{y}_{w}u_{w}\\
+    &= - \sum_{x \in \mathrm{Vocab}}y_{x}u_{x} + \sum_{w \in \mathrm{Vocab}}\hat{y}_{w}u_{w}\\
+    &= \sum_{x \in \mathrm{Vocab}}(\hat{y}_x - y_{x})u_{x} \\
+    &= U(\hat{y} - y)
+\end{align*}
+
+\section*{(c)}
+\begin{align*}
+    \frac{\partial J_{\mathrm{naive-softmax}}(v_c, o, U)}{\partial u_{w}}
+    
+\end{align*}
+
+\end{document}
