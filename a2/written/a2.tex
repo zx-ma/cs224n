@@ -36,9 +36,52 @@ where $y_o = 1$, $y_w = 0$ for $w \neq o$.
 \end{align*}
 
 \section*{(c)}
+
+\textbf{Case 1: $w \neq o$}
 \begin{align*}
     \frac{\partial J_{\mathrm{naive-softmax}}(v_c, o, U)}{\partial u_{w}}
-    
+    &= - \frac{\partial }{\partial u_{w}} \left[ u_{o}^{\top}v_{c} - \log \sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top}v_{c}) \right] \\
+    &= \frac{\partial }{ \partial u_{w}} \left[\log \sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})\right] \\
+    &= \frac{1}{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})} \frac{\partial }{ \partial u_{w}} \left[ \sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})\right] \\
+    &= \frac{1}{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})}  \left[ \sum_{x \in \mathrm{Vocab}} \frac{\partial }{ \partial u_{w}} \exp(u_{x}^{\top} v_{c})\right] \\
+    &= \frac{1}{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})}  \left[ \sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c}) \frac{\partial }{ \partial u_{w}} (u_{x}^{\top} v_{c})\right]\\
+    &= \frac{1}{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})}  \exp(u_{w}^{\top} v_{c}) \frac{\partial }{ \partial u_{w}} (u_{w}^{\top} v_{c}) \\
+    &= \frac{\exp(u_{w}^{\top} v_{c}) }{\sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top} v_{c})} v_{c} \\
+    &= \hat{y}_{w} v_{c}
 \end{align*}
+\textbf{Case 2: $w = o$}
+\begin{align*}
+    \frac{\partial J_{\mathrm{naive-softmax}}(v_c, o, U)}{\partial u_{w}}
+    &= - \frac{\partial }{\partial u_{w}} \left[ u_{o}^{\top}v_{c} - \log \sum_{x \in \mathrm{Vocab}} \exp(u_{x}^{\top}v_{c}) \right] \\
+    &= - \frac{\partial }{\partial u_{w}} ( u_{o}^{\top}v_{c}) +  \hat{y}_{w} v_{c} \\
+    &= -v_{c} +  \hat{y}_{w} v_{c} \\
+    &= ( \hat{y}_{w} - 1)v_{c}
+\end{align*}
+
+\medskip
+\noindent Thus,
+\[
+    \frac{\partial J_{\mathrm{naive-softmax}}}{\partial u_w} =
+    \begin{cases}
+        (\hat{y}_o - 1) \, v_c, & w = o \\
+        \hat{y}_w \, v_c,       & w \neq o
+    \end{cases}
+\]
+
+\noindent Equivalently, since $ y_{o} = 1 $ and $ y_{w} = 0$ ($w \neq o$),
+this can be written as: 
+\[
+    \frac{\partial J_{\mathrm{naive-softmax}}}{\partial u_w} = (\hat{y}_w - y_{w}) v_c.
+\] 
+ 
+
+
+\section*{(d)}
+
+\begin{align*}
+    \sigma(x) 
+    &= \frac{1}{1 + \exp(-x)}
+\end{align*}
+
 
 \end{document}
