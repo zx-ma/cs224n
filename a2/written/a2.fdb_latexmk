@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1779778047.75921 "/home/mzx/projects/my_cs224n/a2/written/a2.tex" "a2.pdf" "a2" 1779778048.11651 0
-  "/home/mzx/projects/my_cs224n/a2/written/a2.tex" 1779778047.5262 4387 c08879cc6a35d85ff1e4ef0a3fd63308 ""
+["pdflatex"] 1780120756.75309 "/home/mzx/projects/my_cs224n/a2/written/a2.tex" "a2.pdf" "a2" 1780120756.91914 0
+  "/home/mzx/projects/my_cs224n/a2/written/a2.tex" 1780120756.61956 7797 f7ae6ef1716c3ae339a307859536181e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm" 1246382020 1120 7f9f170e8aa57527ad6c49feafd45d54 ""
@@ -40,6 +40,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty" 1734129479 7984 7dbb9280f03c0a315425f1b4f35d43ee ""
@@ -63,8 +64,8 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1764916294 5541377 0af08d58b046ada1f2a2c7d4825ab417 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764916342 3635691 e7377e245b6d43beae5c5e636943cdda ""
   "/usr/local/texlive/2025/texmf.cnf" 1764916293.09654 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "a2.aux" 1779778048.07405 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "a2.tex" 1779778047.5262 4387 c08879cc6a35d85ff1e4ef0a3fd63308 ""
+  "a2.aux" 1780120756.8975 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
+  "a2.tex" 1780120756.61956 7797 f7ae6ef1716c3ae339a307859536181e ""
   (generated)
   "a2.aux"
   "a2.log"

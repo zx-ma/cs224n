@@ -79,9 +79,73 @@ this can be written as:
 \section*{(d)}
 
 \begin{align*}
-    \sigma(x) 
-    &= \frac{1}{1 + \exp(-x)}
+    \frac{\dd}{\dd x} \sigma(x) 
+    &= \frac{\dd}{\dd x} \frac{1}{1 + \exp(-x)} \\
+    &= - (1 + \exp(-x))^{-2} \frac{\dd}{\dd x} (1 + \exp(-x)) \\
+    &= - (1 + \exp(-x))^{-2} \frac{\dd}{\dd x} (\exp(-x))\\
+    &= - (1 + \exp(-x))^{-2} \exp(-x) \frac{\dd}{\dd x} (-x) \\
+    &= \frac{\exp(-x) }{(1 + \exp(-x))^{2}} \\
+    &= \frac{1}{1 + \exp(-x)} \cdot \frac{\exp(-x)}{1 + \exp(-x)} \\
+      &= \sigma(x) \cdot (1 - \sigma(x))
+\end{align*}
+
+\section*{(e)}
+
+\begin{align*}
+      \frac{\partial}{\partial z} \log \sigma(z)
+      &= \frac{1}{\sigma(z)} \cdot \sigma(z)(1 - \sigma(z)) = 1 - \sigma(z) \\
+      \frac{\partial}{\partial z} \log \sigma(-z)
+      &= \frac{1}{\sigma(-z)} \cdot \sigma(-z)(1 - \sigma(-z)) \cdot (-1) =\sigma(-z) - 1=  -\sigma(z)
+\end{align*}
+
+\textbf{(1) $\partial J / \partial v_c$:}
+
+\begin{align*}
+    \frac{\partial}{\partial v_c} J_{\mathrm{neg-sample}}(v_{c}, o, U) 
+    &= - \frac{\partial}{\partial v_c}  \left[\log(\sigma(u_{o}^{\top}v_{c})) + \sum_{k=1}^{K}\log(\sigma(-u_{k}^{\top}v_{c}))\right] \\
+    &=  - \left[  [1 - \sigma(u_{o}^{\top}v_{c}) ] \frac{\partial}{\partial v_c} u_{o}^{\top}v_{c}  +  \frac{\partial}{\partial v_c} \sum_{k=1}^{K}\log(\sigma(-u_{k}^{\top}v_{c}))\right] \\
+    &=  [ \sigma(u_{o}^{\top}v_{c}) - 1 ] u_{o} - \sum_{k=1}^{K}  \frac{\partial}{\partial v_c} \log(\sigma(-u_{k}^{\top}v_{c})) \\
+    &= [ \sigma(u_{o}^{\top}v_{c}) - 1 ] u_{o} - \sum_{k=1}^{K} -\sigma(u_{k}^{\top}v_{c}) \frac{\partial}{\partial v_c}( u_{k}^{\top}v_{c}) \\
+    &= [ \sigma(u_{o}^{\top}v_{c}) - 1 ] u_{o} + \sum_{k=1}^{K} \sigma(u_{k}^{\top}v_{c})  u_{k}
 \end{align*}
 
 
+\textbf{(2) $\partial J / \partial u_o$:}
+\begin{align*}
+    \frac{\partial}{\partial u_o} J_{\mathrm{neg-sample}}(v_{c}, o, U)
+    &= - \frac{\partial}{\partial u_o}  \left[\log(\sigma(u_{o}^{\top}v_{c})) + \sum_{k=1}^{K}\log(\sigma(-u_{k}^{\top}v_{c}))\right] \\
+    &= - \frac{\partial}{\partial u_o} \log(\sigma(u_{o}^{\top}v_{c})) \\
+    &=  [ \sigma(u_{o}^{\top}v_{c}) - 1 ] v_{c}
+\end{align*}
+
+\textbf{(3) $\partial J / \partial u_k$ (for some $k \in [1, K]$):}
+\begin{align*}
+    \frac{\partial}{\partial u_k} J_{\mathrm{neg-sample}}(v_{c}, o, U)
+    &= - \frac{\partial}{\partial u_k}  \left[\log(\sigma(u_{o}^{\top}v_{c})) + \sum_{k'=1}^{K}\log(\sigma(-u_{k'}^{\top}v_{c}))\right] \\
+    &= - \frac{\partial}{\partial u_k}  \sum_{k'=1}^{K}\log(\sigma(-u_{k'}^{\top}v_{c}))
+\end{align*}
+\noindent Notice that $\dfrac{\partial(u_{k'}^{\top}v_{c})}{\partial u_k} = v_{c}$ when $k' = k$, otherwise it is $0$.
+\begin{align*}
+    \frac{\partial J}{\partial u_k}
+    &= - \left[-\sigma(u_{k}^{\top}v_{c}) \cdot v_c\right] \\
+    &= \sigma(u_{k}^{\top}v_{c}) v_c
+\end{align*}
+ negative sampling loss only involves $K+1$ dot products. 
+ naive softmax requires summing over the entire vocabulary 
+
+\section*{(f)}
+
+\noindent \textbf{(1)}
+\[
+    \frac{\partial J_{\mathrm{skip-gram}}(v_{c},w_{t-m},...w_{t+m}, U)}{\partial U} = \sum_{-m \le j \le m ,j \neq 0} \frac{\partial J(v_{c}, w_{t+j}, U) }{\partial U}
+\]
+
+\noindent \textbf{(2)}
+\[
+    \frac{\partial J_{\mathrm{skip-gram}}(v_{c},w_{t-m},...w_{t+m}, U)}{\partial v_c} = \sum_{-m \le j \le m ,j \neq 0} \frac{\partial J(v_{c}, w_{t+j}, U) }{\partial v_c}
+\]
+\noindent \textbf{(3)}
+\[
+    \frac{\partial J_{\mathrm{skip-gram}}(v_{c},w_{t-m},...w_{t+m}, U)}{\partial v_w} = \sum_{-m \le j \le m ,j \neq 0} \frac{\partial J(v_{c}, w_{t+j}, U) }{\partial v_w} =  \sum_{-m \le j \le m ,j \neq 0} 0 = 0
+\]
 \end{document}
