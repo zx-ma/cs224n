@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\usepackage{amsmath, geometry, amssymb, bm}
+\usepackage{amsmath, geometry, amssymb, bm, graphicx}
 \geometry{margin=1in}
 \newcommand{\dd}{\mathrm{d}}
 
@@ -148,4 +148,13 @@ this can be written as:
 \[
     \frac{\partial J_{\mathrm{skip-gram}}(v_{c},w_{t-m},...w_{t+m}, U)}{\partial v_w} = \sum_{-m \le j \le m ,j \neq 0} \frac{\partial J(v_{c}, w_{t+j}, U) }{\partial v_w} =  \sum_{-m \le j \le m ,j \neq 0} 0 = 0
 \]
+
+\section*{Coding (c): word vectors visualization}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{word_vectors.png}
+    \caption{word vectors}
+\end{figure}
+
 \end{document}
