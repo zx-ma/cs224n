@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# os junk
+.DS_Store
+
+# latex logs
+*.log
+
+# large archives (small ones like a1/a2.zip are kept)
+a3.zip
+
+# large course datasets
+a3/data/
