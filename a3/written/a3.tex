@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, geometry, amssymb, bm, graphicx}
+\geometry{margin=1in}
+\newcommand{\dd}{\mathrm{d}}
+
+\begin{document}
+\title{cs224n a3 mzx}
+\maketitle
+
+\section*{(1)}
+\subsection*{a}
+\noindent \textbf{\romannumeral1}
+one batch only count $1-\beta_1$ (usually $10\%$) in the update, so the update is less likely to swing the direction. so we can get a more stable convergence
+
+\noindent \textbf{\romannumeral2}
+$m/\sqrt{v}$ will be normalised to a suitable size. parameters with small $v$ get larger updates (compared with pure sgd); params with small gradients can still have a suitable update speed. params with large gradients are scaled down can reduce the oscillation.
+
+\subsection*{b}
+
+\noindent \textbf{\romannumeral1}
+\[
+\gamma = \frac{1}{1- p_{\mathrm{drop}}}
+\]
+
+\begin{align*}
+\mathbb{E}_{p_{\mathrm{drop}}}[h_{\mathrm{drop}}]_i
+&= \mathbb{E}_{p_{\mathrm{drop}}}[\gamma d \odot h]_i\\
+&= \mathbb{E}_{p_{\mathrm{drop}}} [\frac{1}{1- p_{\mathrm{drop}}} d \odot h]_i\\
+&= \frac{1}{1- p_{\mathrm{drop}}}  \mathbb{E}_{p_{\mathrm{drop}}} [d \odot h]_i \\
+&= \frac{1}{1- p_{\mathrm{drop}}} h_i  \mathbb{E}_{p_{\mathrm{drop}}}[d_i]\\
+&= \frac{1}{1- p_{\mathrm{drop}}}  h_i  (1- p_{\mathrm{drop}}) \\
+&= h_i
+\end{align*}
+\noindent \textbf{\romannumeral2}
+
+when training dropout is used to prevent overfitting, help all the neurons learning usfull info\\
+
+at evaluation we want the model's full capacity and a deterministic output, so we use all units with no random dropping; otherwise the same input could give different
+predictions. the $\gamma$ scaling already matches the expected activation, so at test time we just use the full $h$ directly.
+
+\section*{(2)}
+\subsection*{a}
+
+\begin{tabular}{llll}
+\hline
+stack & buffer & new dependency & transition \\
+\hline
+{[ROOT]} & [I, parsed, this, sentence, correctly] & & Initial Configuration \\
+{[ROOT, I]} & [parsed, this, sentence, correctly] & & SHIFT \\
+{[ROOT, I, parsed]} & [this, sentence, correctly] & & SHIFT \\
+{[ROOT, parsed]} & [this, sentence, correctly] & parsed$\to$I & LEFT-ARC \\
+% mine
+{[ROOT, parsed, this]} & [sentence, correctly] & & SHIFT \\
+{[ROOT, parsed, this, sentence]} & [ correctly] & & SHIFT \\
+{[ROOT, parsed,  sentence]} & [ correctly] & sentence$\to$this&  LEFT-ARC \\
+{[ROOT, parsed]} & [ correctly] & parsed$\to$sentence&  RIGHT-ARC \\
+{[ROOT, parsed, correctly]} & [ ] & & SHIFT \\
+{[ROOT, parsed]} & [ ] & parsed$\to$correctly & RIGHT-ARC \\
+{[ROOT]} & [ ] & ROOT$\to$parsed & RIGHT-ARC \\
+\hline
+\end{tabular}
+\subsection*{b}
+$2n$ each of the n words is shifted from buffer to stack once, so n shifts. And each of the n words is removed by an arc action, so n times of arc. in total $2n$
+\subsection*{e}
+Best dev UAS: 88.75; 
+Test UAS: 88.97
+\subsection*{f}
+\noindent \textbf{\romannumeral1}\\
+Error type: Verb Phrase Attachment Error \\
+Incorrect dependency: wedding $\to$ fearing \\
+Correct dependency: heading $\to$ fearing \\
+
+\noindent \textbf{\romannumeral2}\\
+Error type: Coordination Attachment Error \\
+Incorrect dependency: makes $\to$ rescue \\
+Correct dependency: rush $\to$ rescue \\
+\noindent \textbf{\romannumeral3}\\
+Error type: Prepositional Phrase Attachment Error \\
+Incorrect dependency: named $\to$ Midland \\
+Correct dependency: Joe $\to$ Midland \\
+
+\noindent \textbf{\romannumeral4}\\
+Error type: Modifier Attachment Error \\
+Incorrect dependency: elements $\to$ most \\
+Correct dependency: crucial $\to$ most \\
+
+\end{document}

@@ -13,5 +13,6 @@ __pycache__/
 # large archives (small ones like a1/a2.zip are kept)
 a3.zip
 
-# large course datasets
+
 a3/data/
+a3/results/
