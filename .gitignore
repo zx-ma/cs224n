@@ -10,9 +10,17 @@ __pycache__/
 # latex logs
 *.log
 
-# large archives (small ones like a1/a2.zip are kept)
+# large archives
 a3.zip
+a4.zip
 
 
 a3/data/
 a3/results/
+
+a4/en_es_data/
+a4/outputs/
+a4/model.bin
+a4/model.bin.optim
+a4/vocab.json
+assignment4.zip
